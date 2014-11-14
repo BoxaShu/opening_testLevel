@@ -13,10 +13,12 @@ using Rtm = Autodesk.AutoCAD.Runtime;
 
 // [assembly: Rtm.CommandClass(typeof(MyClassSerializer.Commands))]
 
+
 namespace Opening_testLevel
 {
     public class Commands
     {
+        //Проверка блоков отверстий, в Autocad, на попадание в отметку этажа
         [Rtm.CommandMethod("bx_opening_testLevel")]
         static public void bx_opening_testLevel()
         {
