@@ -83,9 +83,47 @@ namespace Opening_testLevel
                                 if (acEnt is Db.BlockReference)
                                 {
                                     Db.BlockReference acBlRef = (Db.BlockReference) acEnt;
-                                    Db.AttributeCollection attrCol = acBlRef.AttributeCollection;
+                                    
+                                    
+                                    // тут нужна проверка имени блока.
+                                    //тут выясняю истинное имя блока для последующего обновления атрибутов.
+                                    //Проверяю является ли выделенный блок динамическим
+                                    //Получаю настоящие/родное имя динамического блока
+
+                                    Db.BlockTableRecord blr = (Db.BlockTableRecord)acTrans.GetObject(acBlRef.DynamicBlockTableRecord, 
+                                                                                                    Db.OpenMode.ForRead);
+
+
+                                    
+                                    if(blr.HasAttributeDefinitions)
+                                    {
+
+                                        Db.BlockTableRecord blr_nam = (Db.BlockTableRecord)acTrans.GetObject(blr.ObjectId, 
+                                                                                                    Db.OpenMode.ForRead);
+                                        // тут лежит имя блока, в том числе динамческого блока
+                                        String acBlock_nam = blr_nam.Name.ToUpper();
+
+
+                                        //Теперь вот этот вот фрагмент кода на VB.NEt  надо переписать на С#
+                                        /*
+                               If acBlock_nam.ToUpper Like "Отв с мар*".ToUpper Or
+                                    acBlock_nam.ToUpper = "Otverstie".ToUpper Then
+                                    ...
+                                End If
+                                         */
+
+                                        if (acBlock_nam.Trim().Contains("Отв с мар".ToUpper()) | 
+                                            (acBlock_nam.Trim().Contains("Otverstie".ToUpper())))
+                                        {
+
+                                      
+
+
+                                        Db.AttributeCollection attrCol = acBlRef.AttributeCollection;
                                     if (attrCol.Count > 0)
                                     {
+                                       
+                                        
                                         Double Otm_n = 0;
                                         Double visota = 0;
                                         Double Otm_v = 0;
@@ -122,11 +160,8 @@ namespace Opening_testLevel
                                         if ((Otm_n < DownLevelRes.Value) | (Otm_v > UpLevelRes.Value))
                                         {
 
-                                            // Создание отрезка начинающегося в 0,0 и заканчивающегося в 5,5
-                                            //Db.Circle acCircle = new Db.Circle();
-                                            //var circle = new Db.Circle();
-                                            var acCircle = new Db.Circle();
-
+                                            // Создание окружности
+                                            Db.Circle acCircle = new Db.Circle();
 
                                             acCircle.Center = acBlRef.Position;
                                             acCircle.Radius = 111;
@@ -149,8 +184,14 @@ namespace Opening_testLevel
 
                                         
 
-                                    }
-                                }
+                                    }   //Проверка что кол аттрибутов больше 0
+
+                                    }  //Проверка имени блока
+
+                                    }  //Проверка наличия атрибутов
+
+
+                                }   //Проверка, что объект это ссылка на блок
                               //acEnt.ColorIndex = 3;
                             }
                         }
