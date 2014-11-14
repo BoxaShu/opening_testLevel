@@ -121,8 +121,11 @@ namespace Opening_testLevel
                                         {
 
                                             // Создание отрезка начинающегося в 0,0 и заканчивающегося в 5,5
-                                            //Db.Circle acCircle = new Db.Circle(new Gem.Point3d(0, 0, 0), new Gem.Point3d(5, 5, 0));
-                                            Db.Circle acCircle = new Db.Circle();
+                                            //Db.Circle acCircle = new Db.Circle();
+                                            //var circle = new Db.Circle();
+                                            var acCircle = new Db.Circle();
+
+
                                             acCircle.Center = acBlRef.Position;
                                             acCircle.Radius = 111;
                                             acCircle.ColorIndex = 1;
