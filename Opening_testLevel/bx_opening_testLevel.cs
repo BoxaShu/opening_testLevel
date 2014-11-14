@@ -45,6 +45,12 @@ namespace Opening_testLevel
             }
 
 
+            //Количество выбранных объектов
+            int ObjSelCount = 0;
+            //Количество КВАДРАТНЫХ отверстий
+            // Архи при расстановки отверстий очень любят путать шиину и высоту!
+            int squareCount = 0;
+
 
             // старт транзакции
             using (Db.Transaction acTrans = acCurDb.TransactionManager.StartOpenCloseTransaction())
@@ -116,7 +122,8 @@ namespace Opening_testLevel
                                             (acBlock_nam.Trim().Contains("Otverstie".ToUpper())))
                                         {
 
-                                      
+
+                                            ObjSelCount = ObjSelCount+1 ;
 
 
                                         Db.AttributeCollection attrCol = acBlRef.AttributeCollection;
@@ -140,13 +147,14 @@ namespace Opening_testLevel
                                                 // Otm_n = Double.Parse(acAttRef.TextString);
                                                 //Double.TryParse(acAttRef.TextString, Otm_n);
                                                 Double.TryParse(acAttRef.TextString.Replace(',','.'), out Otm_n);
-
+                                                Otm_n = Math.Round(Otm_n, 0);
                                             }
 
                                             if (acAttRef.Tag == "ВЫСОТА")
                                             {
                                                 //visota = Double.Parse(acAttRef.TextString);
                                                 Double.TryParse(acAttRef.TextString.Replace(',', '.'), out visota);
+                                                visota = Math.Round(visota, 0);
                                             }
 
 
@@ -154,6 +162,42 @@ namespace Opening_testLevel
 
 
                                         }
+
+
+
+
+                                        // Тут еще нужно считать динамический параметр "Ширина"
+                                        //и проверить отверстие на квадратность
+
+                                        Db.DynamicBlockReferencePropertyCollection acBlockDynProp =
+                                            acBlRef.DynamicBlockReferencePropertyCollection;
+                                        if (acBlockDynProp != null)
+                                        {
+                                            foreach (Db.DynamicBlockReferenceProperty obj in acBlockDynProp)
+                                            {
+                                                if (obj.PropertyName == "Ширина")
+                                                {
+
+                                                    Double shirina = Math.Round(Double.Parse(obj.Value.ToString()), 0);
+
+
+
+
+                                                    if (shirina == visota)
+                                                    {
+
+                                                        squareCount = squareCount + 1;
+
+                                                    }
+
+                                                }
+
+                                            }
+                                        }
+
+
+
+
 
                                         Otm_v = Otm_n + visota / 1000;
 
@@ -202,6 +246,13 @@ namespace Opening_testLevel
 
                 
             }
+
+
+            // Тут вывести количество обработтаных блоков  и кол квадратных блоков
+            acEd.WriteMessage("\n Количество обработтаных блоков: " + ObjSelCount.ToString());
+            acEd.WriteMessage("\n Количество КВАДРАТНЫХ блоков: " + squareCount.ToString());
+
+
         }
     }
 }
