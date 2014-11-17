@@ -14,10 +14,31 @@ using Rtm = Autodesk.AutoCAD.Runtime;
 // [assembly: Rtm.CommandClass(typeof(MyClassSerializer.Commands))]
 
 
-namespace Opening_testLevel
+namespace boxashu
 {
-    public class Commands
+
+    public class Commands : Rtm.IExtensionApplication
     {
+
+        public void Initialize()
+        {
+            //Ed.Editor ed = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
+            //ed.WriteMessage("\ninitialization test start...");
+            
+            String TabName = "ACAD_DLL_Ribbon";
+            String TabTitle = "ACAD_DLL";
+            String PanelName = "opening";
+            String buttonName = "testLevel";
+            String _command = "._bx_opening_testLevel ";
+            ////acDoc.SendStringToExecute("._circle 2,2,0 4 ", true, false, false);
+            AddRibbons.AddRibbon(TabName, TabTitle, PanelName, buttonName, _command);
+        }
+        public void Terminate()
+        {
+            Console.WriteLine("finish!");
+        }
+  
+
         //Проверка блоков отверстий, в Autocad, на попадание в отметку этажа
         [Rtm.CommandMethod("bx_opening_testLevel")]
         static public void bx_opening_testLevel()
