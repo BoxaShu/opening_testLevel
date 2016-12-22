@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BDB247DA-9174-456A-A9BC-90B5575EF8AE}</ProjectGuid>
+    <ProjectGuid>{DCC42346-693D-4C4F-A31A-EB464D9BE775}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Opening_testLevel</RootNamespace>
-    <AssemblyName>Opening_testLevel_2014</AssemblyName>
+    <AssemblyName>Opening_testLevel_2017</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,19 +33,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AcCoreMgd">
-      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2014\inc\AcCoreMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2017\inc\AcCoreMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcDbMgd">
-      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2014\inc\AcDbMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2017\inc\AcDbMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AcMgd">
-      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2014\inc\AcMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2017\inc\AcMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AdWindows">
-      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2014\inc\AdWindows.dll</HintPath>
+      <HintPath>..\..\..\..\..\_SDK\Autodesk\Autocad\ObjectARX_2017\inc\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -53,7 +53,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,12 +61,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddRibbon.cs" />
-    <Compile Include="bx_opening_testLevel.cs" />
-    <Compile Include="ErroeMetric.cs" />
-    <Compile Include="Opening.cs" />
+    <Compile Include="..\Opening_testLevel\AddRibbon.cs">
+      <Link>AddRibbon.cs</Link>
+    </Compile>
+    <Compile Include="..\Opening_testLevel\bx_opening_testLevel.cs">
+      <Link>bx_opening_testLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Opening_testLevel\ErroeMetric.cs">
+      <Link>ErroeMetric.cs</Link>
+    </Compile>
+    <Compile Include="..\Opening_testLevel\Opening.cs">
+      <Link>Opening.cs</Link>
+    </Compile>
+    <Compile Include="..\Opening_testLevel\sec.cs">
+      <Link>sec.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sec.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
